@@ -161,8 +161,8 @@ function renderPie(monthTx) {
           const { width, height, ctx } = chart;
           ctx.save();
 
-          const centerX = width / 2 - (isMobile ? 0 : 50);
-          const centerY = height / 2;
+          const centerX = width / 2 - (isMobile ? 0 : 78);
+          const centerY = height / 2 + (isMobile ? 0 : 20);
 
           const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
 
