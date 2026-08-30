@@ -1,0 +1,415 @@
+:root {
+  --brand: #2563eb;
+  --brand-dark: #1d4ed8;
+  --bg: #f5f7fa;
+  --card-bg: #ffffff;
+  --text-muted: #6b7280;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #1f2937;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--brand) !important;
+}
+
+.nav-link.active {
+  color: var(--brand) !important;
+  font-weight: 600;
+}
+
+.card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 1.25rem 1.5rem;
+}
+
+.stat-card .label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-card .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.value.positive { color: #16a34a; }
+.value.negative { color: #dc2626; }
+
+.btn-brand {
+  background-color: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.btn-brand:hover {
+  background-color: var(--brand-dark);
+  border-color: var(--brand-dark);
+  color: #fff;
+}
+
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef2ff 0%, #f5f7fa 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 6px;
+}
+
+.table-responsive {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.badge-income { background-color: #dcfce7; color: #166534; }
+.badge-expense { background-color: #fee2e2; color: #991b1b; }
+
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem 0;
+}
+
+/* Стили для вкладок авторизации */
+.auth-wrapper .nav-pills .nav-link {
+  color: #1f2937;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.auth-wrapper .nav-pills .nav-link:hover {
+  background-color: #e5e7eb;
+}
+
+.auth-wrapper .nav-pills .nav-link.active {
+  color: #ffffff !important;
+  background-color: var(--brand);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* ===== КНОПКА "ВОЙТИ" БЕЛЫЙ ТЕКСТ ===== */
+.btn-brand,
+.btn-brand:visited,
+.btn-brand:active,
+.btn-brand:focus {
+  color: #ffffff !important;
+  background-color: var(--brand) !important;
+  border-color: var(--brand) !important;
+}
+
+.btn-brand:hover {
+  color: #ffffff !important;
+  background-color: var(--brand-dark) !important;
+  border-color: var(--brand-dark) !important;
+}
+
+.auth-wrapper .btn-brand {
+  color: #ffffff !important;
+}
+
+button.btn-brand,
+input.btn-brand {
+  color: #ffffff !important;
+}
+
+/* ===== НАВИГАЦИЯ С ИКОНКАМИ ===== */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link img {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  display: inline-block;
+  filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(90%);
+  transition: filter 0.2s ease;
+}
+
+.nav-link:hover img {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(86%) saturate(3300%) hue-rotate(215deg) brightness(95%) contrast(98%);
+}
+
+.nav-link.active img {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(86%) saturate(3300%) hue-rotate(215deg) brightness(95%) contrast(98%);
+}
+
+/* ===== МОБИЛЬНОЕ НИЖНЕЕ МЕНЮ ===== */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 6px 0;
+  z-index: 1050;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mobile-bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  min-width: 56px;
+}
+
+.mobile-bottom-nav .nav-item svg {
+  width: 24px;
+  height: 24px;
+  stroke: #6b7280;
+  fill: none;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+}
+
+.mobile-bottom-nav .nav-item span {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.mobile-bottom-nav .nav-item.active {
+  color: var(--brand);
+}
+
+.mobile-bottom-nav .nav-item.active svg {
+  stroke: var(--brand);
+  fill: var(--brand);
+  fill-opacity: 0.1;
+}
+
+.mobile-bottom-nav .nav-item:hover {
+  color: var(--brand);
+}
+
+.mobile-bottom-nav .nav-item:hover svg {
+  stroke: var(--brand);
+}
+
+/* ===== СКРЫВАЕМ МОБИЛЬНУЮ ВЕРСИЮ НА ДЕСКТОПЕ ===== */
+.mobile-only {
+  display: none !important;
+}
+
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+@media (max-width: 767.98px) {
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  .navbar-collapse {
+    display: none !important;
+  }
+
+  .navbar {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    min-height: 44px !important;
+  }
+
+  .navbar .container {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .navbar-brand img {
+    height: 28px !important;
+  }
+
+  .navbar .ms-auto .text-muted {
+    font-size: 12px !important;
+  }
+
+  .navbar .ms-auto .btn-sm {
+    font-size: 11px !important;
+    padding: 2px 8px !important;
+  }
+
+  .container {
+    padding-bottom: 80px !important;
+  }
+
+  /* ===== МОБИЛЬНЫЕ КАРТОЧКИ ===== */
+  .table-responsive {
+    overflow-x: visible !important;
+  }
+
+  .table thead {
+    display: none !important;
+  }
+
+  .table tbody tr {
+    display: block !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    margin-bottom: 10px !important;
+    border: 1px solid #f0f0f0 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .table tbody td {
+    display: block !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    text-align: left !important;
+  }
+
+  .table tbody td.desktop-only {
+    display: none !important;
+  }
+
+  .table tbody td.mobile-only {
+    display: block !important;
+    padding: 14px 16px !important;
+  }
+
+  .mobile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+  }
+
+  .mobile-row-header {
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+  }
+
+  .mobile-row-header .mobile-date {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1f2937;
+  }
+
+  .mobile-row-header .badge {
+    font-size: 12px !important;
+    padding: 3px 12px !important;
+  }
+
+  .mobile-row-main {
+    padding: 4px 0;
+  }
+
+  .mobile-row-main .mobile-category {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .mobile-row-main .mobile-amount {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .mobile-row-comment {
+    font-size: 13px;
+    font-weight: 400;
+    color: #6b7280;
+    padding-top: 4px;
+    border-top: 1px dashed #f0f0f0;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  .mobile-row-actions {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 6px;
+  }
+
+  .mobile-row-actions .btn {
+    flex: 1;
+    font-size: 13px !important;
+    padding: 6px 0 !important;
+    text-align: center;
+    border-radius: 8px !important;
+  }
+
+  .mobile-row-actions .btn-outline-secondary {
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+  }
+
+  .mobile-row-actions .btn-outline-danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .card.p-3 {
+    padding: 12px !important;
+  }
+
+  .card.p-3.mb-4 {
+    padding: 10px !important;
+  }
+
+  .card.p-3.mb-4 .form-label {
+    font-size: 10px !important;
+    margin-bottom: 1px !important;
+  }
+
+  .card.p-3.mb-4 .form-select-sm,
+  .card.p-3.mb-4 .form-control-sm {
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+  }
+
+  .card.p-3.mb-4 .btn-sm {
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+  }
+}
+
+/* ===== МОБИЛЬНЫЕ ГРАФИКИ ===== */
+@media (max-width: 767.98px) {
+  #dailyChart,
+  #trendChart,
+  #categoryPie {
+    height: 280px !important;
+    max-height: 280px !important;
+  }
+}

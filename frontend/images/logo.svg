@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60">
+  <!-- Иконка кошелёк -->
+  <rect x="0" y="10" width="44" height="40" rx="10" fill="#2563eb"/>
+  <circle cx="28" cy="30" r="8" fill="white" opacity="0.9"/>
+  <rect x="6" y="16" width="28" height="4" rx="2" fill="white" opacity="0.6"/>
+  <rect x="6" y="32" width="20" height="4" rx="2" fill="white" opacity="0.6"/>
+
+  <!-- Текст Фин -->
+  <text x="56" y="42" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="800" fill="#1f2937">
+    Фин
+  </text>
+
+  <!-- Текст Учет (синий акцент) -->
+  <text x="130" y="42" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="300" fill="#2563eb">
+    Учет
+  </text>
+</svg>
