@@ -66,11 +66,14 @@ def export_transactions(
             total_income += Decimal(str(tx.amount))
         elif tx.type == "expense":
             total_expense += Decimal(str(tx.amount))
+        elif tx.type == "investment":
+            total_investment += Decimal(str(tx.amount))
 
     ws.append([])
     ws.append(["", "", "Итого доходы:", float(total_income)])
     ws.append(["", "", "Итого расходы:", float(total_expense)])
-    ws.append(["", "", "Разница:", float(total_income - total_expense)])
+    ws.append(["", "", "Итого инвестиции:", float(total_investment)])  # <-- ДОБАВИТЬ
+    ws.append(["", "", "Разница:", float(total_income - total_expense - total_investment)])
 
     # ===== ДОБАВЛЯЕМ ПРИМЕЧАНИЕ =====
     ws.append([])

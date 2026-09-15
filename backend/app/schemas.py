@@ -29,6 +29,7 @@ class UserOut(BaseModel):
     id: int
     email: EmailStr
     username: str
+    currency: str
     created_at: datetime
 
     class Config:
@@ -44,7 +45,7 @@ class Token(BaseModel):
 # ---------- Transactions ----------
 
 class TransactionBase(BaseModel):
-    type: Literal["income", "expense"]
+    type: Literal["income", "expense", "investment"]
     category: str
     amount: Decimal = Field(gt=0)
     date: date
@@ -57,7 +58,7 @@ class TransactionCreate(TransactionBase):
 
 
 class TransactionUpdate(BaseModel):
-    type: Optional[Literal["income", "expense"]] = None
+    type: Optional[Literal["income", "expense", "investment"]] = None
     category: Optional[str] = None
     amount: Optional[Decimal] = Field(default=None, gt=0)
     date: Optional[str] = None  # <-- ИЗМЕНЕНО НА str
@@ -106,6 +107,8 @@ class DashboardOut(BaseModel):
     balance: Decimal
     month_income: Decimal
     month_expense: Decimal
+    month_investment: Decimal  # <-- ДОБАВИТЬ
+    total_investment: Decimal  # <-- ДОБАВИТЬ
     daily_expenses: List[DailyPoint]
     recent_transactions: List[RecentTransaction]
 
@@ -113,6 +116,7 @@ class DashboardOut(BaseModel):
 class CategoriesOut(BaseModel):
     income: List[str]
     expense: List[str]
+    investment: List[str]
 
 # ===== EMAIL VERIFICATION =====
 
@@ -138,3 +142,6 @@ class ResetPasswordRequest(BaseModel):
         if "new_password" in info.data and v != info.data["new_password"]:
             raise ValueError("Пароли не совпадают")
         return v
+
+class UserUpdate(BaseModel):
+    currency: Optional[str] = None

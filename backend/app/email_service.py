@@ -13,7 +13,7 @@ load_dotenv()
 # ===== НАСТРОЙКА REDIS (с протоколом 2) =====
 redis_client = redis.Redis(
     host='localhost',
-    port=6380,
+    port=6379,
     db=0,
     decode_responses=True,
     protocol=2  # <-- отключаем HELLO

@@ -84,9 +84,6 @@ const Api = {
   login(payload) {
     return this.request("/api/auth/login", { method: "POST", body: payload });
   },
-  getProfile() {
-    return this.request("/api/profile");
-  },
   verifyCode(payload) {
     return this.request("/api/auth/verify", { method: "POST", body: payload });
   },
@@ -101,6 +98,14 @@ const Api = {
       method: "POST",
       body: payload,
     });
+  },
+
+  // ---- Profile ----
+  getProfile() {
+    return this.request("/api/profile");
+  },
+  updateProfile(payload) {
+    return this.request("/api/profile", { method: "PUT", body: payload });
   },
 
   // ---- Reference data ----
@@ -168,11 +173,26 @@ const Api = {
 
 function formatMoney(value) {
   const n = Number(value);
+  const user = Auth.getUser();
+  const currency = user?.currency || "RUB";
+
+  const symbols = {
+    RUB: "₽",
+    USD: "$",
+    EUR: "€",
+    KZT: "₸",
+    BYN: "Br",
+    UAH: "₴",
+  };
+
+  const symbol = symbols[currency] || "₽";
   return (
     n.toLocaleString("ru-RU", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }) + " ₽"
+    }) +
+    " " +
+    symbol
   );
 }
 

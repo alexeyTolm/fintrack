@@ -219,3 +219,7 @@ function renderRecent(transactions) {
     body.appendChild(tr);
   });
 }
+
+document.getElementById("statInvestment").textContent = formatMoney(
+  data.month_investment,
+);

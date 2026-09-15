@@ -226,6 +226,8 @@ input.btn-brand {
   display: none !important;
 }
 
+.badge-investment { background-color: #ede9fe; color: #5b21b6; }
+.text-investment { color: #7c3aed; }
 /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
 @media (max-width: 767.98px) {
   .mobile-bottom-nav {

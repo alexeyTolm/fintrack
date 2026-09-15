@@ -54,7 +54,17 @@
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item me-3">
+          <select id="currencySelect" class="form-select form-select-sm" style="width: auto;">
+            <option value="RUB">₽ RUB</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="KZT">₸ KZT</option>
+            <option value="BYN">Br BYN</option>
+            <option value="UAH">₴ UAH</option>
+          </select>
+        </li>
         <li class="nav-item d-flex align-items-center me-3 text-muted">
           <span>👤 <span id="navUsername"></span></span>
         </li>
@@ -70,22 +80,28 @@
   <h1 class="h4 mb-4">Обзор финансов</h1>
 
   <div class="row g-3 mb-4">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card stat-card">
         <div class="label">Баланс</div>
         <div class="value" id="statBalance">—</div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card stat-card">
         <div class="label">Доходы за месяц</div>
         <div class="value positive" id="statIncome">—</div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card stat-card">
         <div class="label">Расходы за месяц</div>
         <div class="value negative" id="statExpense">—</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card stat-card">
+        <div class="label">Инвестиции</div>
+        <div class="value" id="statInvestment" style="color: #7c3aed;">—</div>
       </div>
     </div>
   </div>

@@ -8,8 +8,12 @@ from .database import engine
 from .routers import auth, transactions, dashboard, plans, export
 load_dotenv()
 models.Base.metadata.create_all(bind=engine)
+from .routers import auth, dashboard, transactions, plans, export, profile
+
 
 app = FastAPI(title="Личный финансовый учет API", version="1.0.0")
+
+app.include_router(profile.router)
 
 app.add_middleware(
     CORSMiddleware,

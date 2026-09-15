@@ -1,7 +1,9 @@
-let CATEGORIES = { income: [], expense: [] };
+let CATEGORIES = { income: [], expense: [], investment: [] };
 let deleteTargetId = null;
-const txModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById("txModal"));
-const deleteModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById("deleteModal"));
+const txModal = () =>
+  bootstrap.Modal.getOrCreateInstance(document.getElementById("txModal"));
+const deleteModal = () =>
+  bootstrap.Modal.getOrCreateInstance(document.getElementById("deleteModal"));
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadCategories();
@@ -14,7 +16,11 @@ async function loadCategories() {
   try {
     CATEGORIES = await Api.getCategories();
     const filterCat = document.getElementById("filterCategory");
-    [...CATEGORIES.income, ...CATEGORIES.expense].forEach((cat) => {
+    [
+      ...CATEGORIES.income,
+      ...CATEGORIES.expense,
+      ...CATEGORIES.investment,
+    ].forEach((cat) => {
       const opt = document.createElement("option");
       opt.value = cat;
       opt.textContent = cat;
@@ -29,7 +35,8 @@ async function loadCategories() {
 function populateCategorySelect(type) {
   const select = document.getElementById("txCategory");
   select.innerHTML = "";
-  CATEGORIES[type].forEach((cat) => {
+  const list = CATEGORIES[type] || [];
+  list.forEach((cat) => {
     const opt = document.createElement("option");
     opt.value = cat;
     opt.textContent = cat;
@@ -60,7 +67,9 @@ function bindFilterEvents() {
     customRangeEls.forEach((el) => el.classList.toggle("d-none", !isCustom));
   });
 
-  document.getElementById("btnFilter").addEventListener("click", loadTransactions);
+  document
+    .getElementById("btnFilter")
+    .addEventListener("click", loadTransactions);
 
   document.getElementById("btnAddTx").addEventListener("click", () => {
     document.getElementById("txModalTitle").textContent = "Новая операция";
@@ -125,15 +134,29 @@ function renderTable(items) {
 
   items.forEach((tx) => {
     const tr = document.createElement("tr");
-    const badgeClass = tx.type === "income" ? "badge-income" : "badge-expense";
-    const label = tx.type === "income" ? "Доход" : "Расход";
-    const sign = tx.type === "income" ? "+" : "−";
+    const badgeClass =
+      tx.type === "income"
+        ? "badge-income"
+        : tx.type === "investment"
+          ? "badge-investment"
+          : "badge-expense";
+    const label =
+      tx.type === "income"
+        ? "Доход"
+        : tx.type === "investment"
+          ? "Инвестиция"
+          : "Расход";
+    const sign = tx.type === "expense" ? "−" : "+";
     const dateFormatted = formatDate(tx.date);
-    const amountClass = tx.type === "income" ? "text-success" : "text-danger";
+    const amountClass =
+      tx.type === "income"
+        ? "text-success"
+        : tx.type === "investment"
+          ? "text-investment"
+          : "text-danger";
     const hasComment = tx.comment && tx.comment.trim() !== "";
 
     tr.innerHTML = `
-      <!-- ДЕСКТОПНАЯ ВЕРСИЯ -->
       <td class="desktop-only">${dateFormatted}</td>
       <td class="desktop-only"><span class="badge ${badgeClass}">${label}</span></td>
       <td class="desktop-only">${tx.category}</td>
@@ -144,7 +167,6 @@ function renderTable(items) {
         <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${tx.id}">🗑️</button>
       </td>
 
-      <!-- МОБИЛЬНАЯ ВЕРСИЯ (без лишней карточки) -->
       <td class="mobile-only" colspan="6">
         <div class="mobile-row mobile-row-header">
           <span class="mobile-date">${dateFormatted}</span>
@@ -180,7 +202,8 @@ function renderTable(items) {
 }
 
 function openEditModal(tx) {
-  document.getElementById("txModalTitle").textContent = "Редактировать операцию";
+  document.getElementById("txModalTitle").textContent =
+    "Редактировать операцию";
   document.getElementById("txId").value = tx.id;
   document.getElementById("txType").value = tx.type;
   populateCategorySelect(tx.type);
@@ -188,7 +211,8 @@ function openEditModal(tx) {
   document.getElementById("txAmount").value = tx.amount;
   document.getElementById("txDate").value = tx.date;
   document.getElementById("txComment").value = tx.comment || "";
-  document.getElementById("txExcludeFromIncome").checked = tx.exclude_from_income || false;
+  document.getElementById("txExcludeFromIncome").checked =
+    tx.exclude_from_income || false;
   txModal().show();
 }
 
@@ -203,7 +227,8 @@ function bindFormEvents() {
       amount: parseFloat(document.getElementById("txAmount").value),
       date: document.getElementById("txDate").value,
       comment: document.getElementById("txComment").value || null,
-      exclude_from_income: document.getElementById("txExcludeFromIncome").checked
+      exclude_from_income: document.getElementById("txExcludeFromIncome")
+        .checked,
     };
     try {
       if (id) {
@@ -218,15 +243,17 @@ function bindFormEvents() {
     }
   });
 
-  document.getElementById("confirmDeleteBtn").addEventListener("click", async () => {
-    try {
-      await Api.deleteTransaction(deleteTargetId);
-      deleteModal().hide();
-      await loadTransactions();
-    } catch (err) {
-      showAlert(err.message);
-    }
-  });
+  document
+    .getElementById("confirmDeleteBtn")
+    .addEventListener("click", async () => {
+      try {
+        await Api.deleteTransaction(deleteTargetId);
+        deleteModal().hide();
+        await loadTransactions();
+      } catch (err) {
+        showAlert(err.message);
+      }
+    });
 }
 
 function showAlert(message) {

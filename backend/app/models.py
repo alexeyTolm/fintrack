@@ -13,6 +13,7 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
     username = Column(String, nullable=False)
+    currency = Column(String, default="RUB", nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     transactions = relationship(

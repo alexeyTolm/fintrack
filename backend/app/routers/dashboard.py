@@ -8,14 +8,14 @@ from sqlalchemy.orm import Session
 
 from .. import models, schemas, security
 from ..database import get_db
-from ..constants import INCOME_CATEGORIES, EXPENSE_CATEGORIES
+from ..constants import INCOME_CATEGORIES, EXPENSE_CATEGORIES, INVESTMENT_CATEGORIES
 
 router = APIRouter(tags=["dashboard"])
 
 
 @router.get("/api/categories", response_model=schemas.CategoriesOut)
 def get_categories():
-    return schemas.CategoriesOut(income=INCOME_CATEGORIES, expense=EXPENSE_CATEGORIES)
+    return schemas.CategoriesOut(income=INCOME_CATEGORIES, expense=EXPENSE_CATEGORIES, investment=INVESTMENT_CATEGORIES)
 
 
 @router.get("/api/dashboard", response_model=schemas.DashboardOut)
@@ -41,7 +41,8 @@ def get_dashboard(
     # ===== БАЛАНС — ВСЕ ДОХОДЫ (ВКЛЮЧАЯ ПОМЕЧЕННЫЕ) =====
     total_income = sum_for("income")  # <-- БЕЗ фильтра
     total_expense = sum_for("expense")
-    balance = total_income - total_expense
+    total_investment = sum_for("investment")  # <-- ДОБАВИТЬ
+    balance = total_income - total_expense - total_investment  # <-- ИЗМЕНИТЬ
 
     today = date.today()
     month_start = today.replace(day=1)
@@ -49,6 +50,7 @@ def get_dashboard(
     # ===== ДОХОДЫ ЗА МЕСЯЦ — ТОЛЬКО БЕЗ ГАЛОЧКИ =====
     month_income = sum_for("income", start=month_start, end=today, exclude_from_income=False)
     month_expense = sum_for("expense", start=month_start, end=today)
+    month_investment = sum_for("investment", start=month_start, end=today)  # <-- ДОБАВИТЬ
 
     window_start = today - timedelta(days=9)
     rows = (
@@ -83,6 +85,8 @@ def get_dashboard(
         balance=balance,
         month_income=month_income,
         month_expense=month_expense,
+        month_investment=month_investment,  # <-- ДОБАВИТЬ
+        total_investment=total_investment,  # <-- ДОБАВИТЬ
         daily_expenses=daily_expenses,
         recent_transactions=recent,
     )

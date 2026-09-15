@@ -27,4 +27,23 @@ document.addEventListener("DOMContentLoaded", () => {
       Auth.logout();
     });
   }
+
+  // ===== ВЫБОР ВАЛЮТЫ =====
+  const currencySelect = document.getElementById("currencySelect");
+  if (currencySelect) {
+    if (user && user.currency) currencySelect.value = user.currency;
+
+    currencySelect.addEventListener("change", async () => {
+      try {
+        const updatedUser = await Api.updateProfile({
+          currency: currencySelect.value,
+        });
+        Auth.setSession(Auth.getToken(), updatedUser);
+        // Перезагружаем страницу, чтобы formatMoney применил новую валюту
+        location.reload();
+      } catch (err) {
+        alert("Ошибка сохранения валюты: " + err.message);
+      }
+    });
+  }
 });
