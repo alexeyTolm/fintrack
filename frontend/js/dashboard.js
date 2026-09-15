@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("statExpense").textContent = formatMoney(
       data.month_expense,
     );
+    document.getElementById("statInvestment").textContent = formatMoney(
+      data.month_investment,
+    );
 
     renderChart(data.daily_expenses);
     renderRecent(data.recent_transactions);
@@ -219,7 +222,3 @@ function renderRecent(transactions) {
     body.appendChild(tr);
   });
 }
-
-document.getElementById("statInvestment").textContent = formatMoney(
-  data.month_investment,
-);
