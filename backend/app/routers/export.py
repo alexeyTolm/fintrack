@@ -44,7 +44,8 @@ def export_transactions(
 
     total_income = Decimal("0")
     total_expense = Decimal("0")
-    type_labels = {"income": "Доход", "expense": "Расход"}
+    total_investment = Decimal("0")  # <-- ДОБАВИТЬ
+    type_labels = {"income": "Доход", "expense": "Расход", "investment": "Инвестиция"}  # <-- ДОБАВИТЬ investment
 
     for tx in rows:
         # ===== ПОКАЗЫВАЕМ СТАТУС ГАЛОЧКИ =====

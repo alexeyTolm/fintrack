@@ -18,9 +18,14 @@
     
     <!-- Мобильная версия: имя + выход -->
     <div class="d-flex align-items-center gap-2 d-lg-none" id="mobileUserInfo">
-      <span class="text-muted" style="font-size: 13px; white-space: nowrap;">
-        👤 <span id="navUsernameMobile"></span>
-      </span>
+      <select id="currencySelectMobile" class="form-select form-select-sm" style="width: auto; font-size: 11px; padding: 2px 4px;">
+        <option value="RUB">₽</option>
+        <option value="USD">$</option>
+        <option value="EUR">€</option>
+        <option value="KZT">₸</option>
+        <option value="BYN">Br</option>
+        <option value="UAH">₴</option>
+      </select>
       <a class="btn btn-outline-secondary btn-sm" href="#" id="logoutBtnMobile" style="font-size: 12px; padding: 2px 8px;">Выйти</a>
     </div>
     
